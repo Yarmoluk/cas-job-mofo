@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CAS'S JOB MOFO 🎯</title>
+  <style>
+    :root {
+      --bg: #0a0a0f;
+      --surface: #12121a;
+      --card: #1a1a28;
+      --border: #2a2a40;
+      --accent: #ff2d55;
+      --accent2: #7c3aed;
+      --accent3: #00d4aa;
+      --gold: #f5a623;
+      --text: #f0f0ff;
+      --muted: #8888aa;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: var(--bg); color: var(--text); min-height: 100vh; }
+
+    /* HEADER */
+    header {
+      background: linear-gradient(135deg, #0a0a0f 0%, #1a0a30 50%, #0a1a3f 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 24px 30px 20px;
+      display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;
+    }
+    .brand { display: flex; align-items: center; gap: 12px; }
+    .brand-icon { font-size: 2em; }
+    .brand-text h1 {
+      font-size: 1.7em; font-weight: 900; letter-spacing: -1px;
+      background: linear-gradient(135deg, #ff2d55, #ff6b35, #f5a623);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    }
+    .brand-text p { color: var(--muted); font-size: 0.82em; margin-top: 2px; }
+    .status-pills { display: flex; gap: 8px; flex-wrap: wrap; }
+    .pill {
+      padding: 6px 14px; border-radius: 50px; font-size: 0.8em; font-weight: 700;
+      border: 1px solid; white-space: nowrap;
+    }
+    .pill.red { background: rgba(255,45,85,0.15); border-color: rgba(255,45,85,0.4); color: #ff2d55; }
+    .pill.purple { background: rgba(124,58,237,0.15); border-color: rgba(124,58,237,0.4); color: #a78bfa; }
+    .pill.green { background: rgba(0,212,170,0.15); border-color: rgba(0,212,170,0.4); color: #00d4aa; }
+    .pill.gold { background: rgba(245,166,35,0.15); border-color: rgba(245,166,35,0.4); color: var(--gold); }
+
+    /* MAIN */
+    main { max-width: 1200px; margin: 0 auto; padding: 28px 20px; }
+
+    /* MISSION BANNER */
+    .mission {
+      background: linear-gradient(135deg, rgba(255,45,85,0.12), rgba(124,58,237,0.12));
+      border: 1px solid rgba(255,45,85,0.25); border-radius: 14px;
+      padding: 22px 26px; margin-bottom: 28px;
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+    }
+    .mission-quote { font-size: 1.05em; font-style: italic; color: #d0d0f0; flex: 1; min-width: 250px; line-height: 1.6; }
+    .mission-stats { display: flex; gap: 20px; }
+    .mstat { text-align: center; }
+    .mstat .val { font-size: 1.6em; font-weight: 900; color: var(--gold); display: block; }
+    .mstat .lbl { font-size: 0.72em; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* SECTION HEADERS */
+    .section-hdr {
+      font-size: 0.72em; font-weight: 800; letter-spacing: 2px; text-transform: uppercase;
+      color: var(--muted); margin: 28px 0 14px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-hdr::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+    /* TODAY BOX */
+    .today-box {
+      background: linear-gradient(135deg, rgba(255,45,85,0.08), rgba(245,166,35,0.08));
+      border: 2px solid rgba(255,45,85,0.3); border-radius: 14px; padding: 22px; margin-bottom: 24px;
+    }
+    .today-box h2 { font-size: 1.05em; color: #ff6b6b; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+    .tasks { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 10px; }
+    .task {
+      background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px; display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .task:hover { background: rgba(255,255,255,0.08); border-color: var(--accent); transform: translateY(-1px); }
+    .task.done { opacity: 0.4; }
+    .task-num {
+      width: 26px; height: 26px; min-width: 26px; border-radius: 50%;
+      background: var(--accent); color: white; font-size: 0.78em; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .task-text { font-size: 0.88em; line-height: 1.4; color: #d0d0f0; }
+    .task-text strong { color: white; display: block; margin-bottom: 2px; }
+
+    /* GRID */
+    .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+    @media(max-width: 800px) { .grid2, .grid3 { grid-template-columns: 1fr; } }
+
+    /* CARD */
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .card-title { font-size: 0.82em; font-weight: 800; color: var(--muted); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 14px; display: flex; align-items: center; gap: 8px; }
+
+    /* JOB SEARCH LINKS */
+    .search-link {
+      display: flex; align-items: center; justify-content: space-between;
+      background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px;
+      padding: 12px 14px; margin-bottom: 8px; text-decoration: none; color: var(--text);
+      transition: all 0.2s; cursor: pointer;
+    }
+    .search-link:hover { background: rgba(124,58,237,0.15); border-color: var(--accent2); transform: translateX(4px); }
+    .search-link:hover .arrow { color: var(--accent2); }
+    .search-link .sl-left { display: flex; align-items: center; gap: 10px; }
+    .sl-platform { font-size: 0.72em; font-weight: 800; padding: 3px 8px; border-radius: 5px; }
+    .sl-platform.li { background: #0077b5; color: white; }
+    .sl-platform.in { background: #003a9b; color: white; }
+    .sl-platform.gg { background: #4285f4; color: white; }
+    .sl-platform.ex { background: #c0392b; color: white; }
+    .sl-platform.wo { background: #27ae60; color: white; }
+    .sl-query { font-size: 0.88em; color: #d0d0f0; }
+    .sl-count { font-size: 0.75em; color: var(--accent3); background: rgba(0,212,170,0.1); padding: 2px 8px; border-radius: 10px; }
+    .arrow { color: var(--muted); font-size: 1.1em; }
+
+    /* COMPANY TARGETS */
+    .company-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--text);
+      transition: all 0.15s;
+    }
+    .company-row:last-child { border-bottom: none; }
+    .company-row:hover { color: #a78bfa; padding-left: 6px; }
+    .company-name { font-size: 0.9em; font-weight: 600; }
+    .company-sub { font-size: 0.76em; color: var(--muted); }
+    .priority-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+    .priority-dot.p1 { background: #ff2d55; box-shadow: 0 0 8px #ff2d55; }
+    .priority-dot.p2 { background: var(--gold); }
+    .priority-dot.warm { background: var(--accent3); box-shadow: 0 0 8px var(--accent3); }
+    .company-link-btn {
+      font-size: 0.72em; background: rgba(124,58,237,0.2); color: #a78bfa;
+      border: 1px solid rgba(124,58,237,0.3); border-radius: 6px; padding: 3px 10px;
+      text-decoration: none; white-space: nowrap;
+    }
+    .company-link-btn:hover { background: rgba(124,58,237,0.4); }
+
+    /* RECRUITERS */
+    .recruiter-row {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .recruiter-row:last-child { border-bottom: none; }
+    .rec-name { font-size: 0.9em; font-weight: 700; }
+    .rec-specialty { font-size: 0.76em; color: var(--muted); }
+    .send-btn {
+      background: var(--accent); color: white; border: none; border-radius: 8px;
+      padding: 6px 14px; font-size: 0.78em; font-weight: 800; cursor: pointer;
+      text-decoration: none; white-space: nowrap; transition: all 0.2s;
+    }
+    .send-btn:hover { background: #e0002a; transform: scale(1.05); }
+    .send-btn.sent { background: rgba(0,212,170,0.2); color: var(--accent3); border: 1px solid var(--accent3); cursor: default; }
+    .send-btn.sent:hover { transform: none; }
+
+    /* COMP BLOCK */
+    .comp-block { text-align: center; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .comp-role { font-size: 0.78em; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px; }
+    .comp-base { font-size: 1.6em; font-weight: 900; color: var(--gold); }
+    .comp-total { font-size: 0.85em; color: var(--accent3); margin-top: 4px; }
+
+    /* PITCH BOX */
+    .pitch {
+      background: linear-gradient(135deg, rgba(124,58,237,0.1), rgba(255,45,85,0.1));
+      border: 1px solid rgba(124,58,237,0.3); border-radius: 12px;
+      padding: 20px; font-style: italic; font-size: 0.95em; line-height: 1.7; color: #d0d0f0;
+      position: relative;
+    }
+    .pitch::before { content: '"'; font-size: 3em; color: var(--accent2); position: absolute; top: -10px; left: 16px; line-height: 1; font-style: normal; }
+    .pitch-label { font-size: 0.7em; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; font-style: normal; }
+
+    /* PIPELINE */
+    .stage-bar { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .stage {
+      flex: 1; min-width: 80px; background: rgba(255,255,255,0.04); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 10px; text-align: center;
+    }
+    .stage .count { font-size: 2em; font-weight: 900; color: var(--muted); }
+    .stage .label { font-size: 0.72em; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-top: 4px; }
+    .stage.active .count { color: var(--accent3); }
+    .stage.active { border-color: rgba(0,212,170,0.3); }
+
+    /* LINKEDIN OPTIMIZER */
+    .linkedin-box { background: rgba(0,119,181,0.1); border: 1px solid rgba(0,119,181,0.3); border-radius: 12px; padding: 18px; }
+    .li-headline { background: #0d1117; border: 1px solid #2a4a6a; border-radius: 8px; padding: 12px 14px; font-family: monospace; font-size: 0.85em; color: #79c0ff; line-height: 1.5; margin: 10px 0; }
+    .copy-btn {
+      background: rgba(0,119,181,0.3); color: #79c0ff; border: 1px solid rgba(0,119,181,0.4);
+      border-radius: 6px; padding: 6px 14px; font-size: 0.78em; cursor: pointer;
+      transition: all 0.2s;
+    }
+    .copy-btn:hover { background: rgba(0,119,181,0.5); }
+
+    /* BOT STATUS */
+    .bot-status { background: rgba(0,212,170,0.06); border: 1px solid rgba(0,212,170,0.2); border-radius: 12px; padding: 18px; }
+    .bot-row { display: flex; align-items: center; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--border); font-size: 0.88em; }
+    .bot-row:last-child { border-bottom: none; }
+    .bot-label { color: var(--muted); }
+    .bot-val { color: var(--accent3); font-weight: 600; font-family: monospace; }
+    .bot-val.warn { color: var(--gold); }
+    .setup-btn {
+      display: block; width: 100%; margin-top: 14px; background: var(--accent3); color: #0a0a0f;
+      border: none; border-radius: 8px; padding: 10px; font-weight: 800; font-size: 0.88em; cursor: pointer;
+      text-decoration: none; text-align: center; transition: all 0.2s;
+    }
+    .setup-btn:hover { opacity: 0.85; }
+
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 20px; text-align: center; color: var(--muted); font-size: 0.8em; }
+
+    /* PULSE ANIMATION */
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
+    .pulse { animation: pulse 2s infinite; }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <div class="brand-icon">🎯</div>
+    <div class="brand-text">
+      <h1>CAS'S JOB MOFO</h1>
+      <p>Executive Job Search Intelligence · Casian Glavce · Toronto → North America</p>
+    </div>
+  </div>
+  <div class="status-pills">
+    <span class="pill red">President · CCO · CRO · VP Sales</span>
+    <span class="pill gold">$300K+ Total Comp</span>
+    <span class="pill green">GTA Hybrid · NA Remote</span>
+    <span class="pill purple">90-Day Sprint</span>
+  </div>
+</header>
+
+<main>
+
+  <!-- MISSION -->
+  <div class="mission">
+    <div class="mission-quote">
+      "Transformational commercial executive · 20+ years industrial distribution · $100M+ revenue scaled from scratch · National HVAC/R at Wolseley · CCO-level P&L · 4 languages · Multilingual · Sustainability credentials · Published thought leader."
+    </div>
+    <div class="mission-stats">
+      <div class="mstat"><span class="val">$100M+</span><span class="lbl">Revenue Track Record</span></div>
+      <div class="mstat"><span class="val">20+</span><span class="lbl">Years in Industry</span></div>
+      <div class="mstat"><span class="val">90</span><span class="lbl">Days to Offer</span></div>
+    </div>
+  </div>
+
+  <!-- TODAY'S MISSION -->
+  <div class="today-box">
+    <h2>🔥 TODAY'S MISSION — Do These Right Now</h2>
+    <div class="tasks">
+      <div class="task" onclick="this.classList.toggle('done')">
+        <div class="task-num">1</div>
+        <div class="task-text"><strong>Email all 10 search firms</strong>Template is ready. Personalize name + firm only. Send all 10 today. Highest ROI action.</div>
+      </div>
+      <div class="task" onclick="this.classList.toggle('done')">
+        <div class="task-num">2</div>
+        <div class="task-text"><strong>Update LinkedIn headline</strong>Copy the optimized headline below. Change it now. Recruiters search this daily.</div>
+      </div>
+      <div class="task" onclick="this.classList.toggle('done')">
+        <div class="task-num">3</div>
+        <div class="task-text"><strong>Run 5 job searches below</strong>Click each search link → apply to anything that scores 18+. Move fast.</div>
+      </div>
+      <div class="task" onclick="this.classList.toggle('done')">
+        <div class="task-num">4</div>
+        <div class="task-text"><strong>Set up automated bot</strong>10 minutes. Daily email at 7 AM with new matches. Never miss a role again.</div>
+      </div>
+      <div class="task" onclick="this.classList.toggle('done')">
+        <div class="task-num">5</div>
+        <div class="task-text"><strong>Connect with 5 CEOs on LinkedIn</strong>Use the connection template. Short, specific, zero-ask. Just get connected.</div>
+      </div>
+      <div class="task" onclick="this.classList.toggle('done')">
+        <div class="task-num">6</div>
+        <div class="task-text"><strong>Add 25 companies to pipeline</strong>Start with the P1 red-dot companies from Target Companies below.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- YOUR PITCH -->
+  <div class="section-hdr">🎤 Your Core Pitch — Memorize. Use Everywhere.</div>
+  <div class="pitch" style="margin-bottom: 24px;">
+    <div class="pitch-label">Say This in Every Conversation</div>
+    I'm a transformational commercial executive with 20+ years in industrial distribution —
+    national HVAC/R at Wolseley Canada, building materials across Central Europe,
+    and CCO-level P&L ownership at Samsar Resources. I've grown businesses from
+    zero to $100M+ in revenue. I'm looking for my next President or CCO role where I can do it again.
+  </div>
+
+  <!-- JOB SEARCH LINKS -->
+  <div class="section-hdr">🔍 Live Job Searches — 10 Boards · Click Any Link to See Roles Right Now</div>
+  <div style="background:rgba(0,212,170,0.06);border:1px solid rgba(0,212,170,0.2);border-radius:10px;padding:12px 16px;margin-bottom:16px;font-size:0.85em;color:#a8d8a8;">
+    🤖 <strong>Bot scrapes these automatically at 7 AM daily</strong> and texts Cas the top matches. These links are for manual browsing anytime.
+  </div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🇨🇦 Canada — GTA Priority</div>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=chief+commercial+officer&location=Toronto%2C+Ontario%2C+Canada&f_E=5%2C6&f_TPR=r86400" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">Chief Commercial Officer — Toronto (Last 24h)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=VP+Sales+industrial+distribution&location=Toronto%2C+Ontario%2C+Canada&f_E=5%2C6&f_TPR=r604800" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">VP Sales Industrial Distribution — Toronto (Last 7d)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=president+distribution+canada&location=Ontario%2C+Canada&f_E=6&f_TPR=r604800" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">President Distribution — Ontario (Last 7d)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=CCO+OR+%22chief+revenue%22+HVAC+Canada&location=Canada&f_E=5%2C6&f_TPR=r604800" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">CCO / CRO HVAC Canada (Last 7d)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://ca.indeed.com/jobs?q=chief+commercial+officer+OR+VP+sales+industrial&l=Toronto%2C+ON&fromage=7&sc=0kf%3Aexplvl%28SENIOR_LEVEL%29%3B" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform in">IN</span>
+          <span class="sl-query">CCO / VP Sales Industrial — Indeed Canada (7d)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.workopolis.com/jobsearch/find-jobs?ak=chief+commercial+officer+OR+vice+president+sales&l=Toronto%2C+ON" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform wo">WO</span>
+          <span class="sl-query">CCO / VP Sales — Workopolis Toronto</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.glassdoor.ca/Job/toronto-chief-commercial-officer-jobs-SRCH_IL.0,7_IC2281069_KO8,32.htm" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform" style="background:#0caa41;color:white;">GD</span>
+          <span class="sl-query">Glassdoor CA — CCO Toronto (includes salary estimates)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.monster.ca/jobs/search?q=chief+commercial+officer+OR+VP+sales&where=Toronto%2C+ON" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform" style="background:#6e45e2;color:white;">MO</span>
+          <span class="sl-query">Monster CA — CCO / VP Sales Toronto</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.eluta.ca/search?q=chief+commercial+officer+OR+president&l=Toronto" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform" style="background:#e85d04;color:white;">EL</span>
+          <span class="sl-query">Eluta.ca — CCO / President (CA employer direct postings)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://ca.talent.com/jobs?k=chief+commercial+officer+OR+VP+sales+industrial&l=Toronto" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform" style="background:#1565c0;color:white;">TC</span>
+          <span class="sl-query">Talent.com — CCO / VP Sales Industrial Canada</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.jobbank.gc.ca/jobsearch/jobsearch?searchstring=chief+commercial+officer&locationstring=Toronto&sort=M" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform" style="background:#b71c1c;color:white;">JB</span>
+          <span class="sl-query">Job Bank Canada — Government of Canada job board</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.adzuna.ca/search?q=VP+sales+industrial+OR+chief+commercial&loc=Toronto&sort_by=date" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform" style="background:#004d99;color:white;">AZ</span>
+          <span class="sl-query">Adzuna CA — VP Sales Industrial / CCO (sorted by date)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.google.com/search?q=%22chief+commercial+officer%22+OR+%22VP+sales%22+industrial+distribution+Toronto&ibp=htl;jobs&tbs=qdr:w" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform gg">GG</span>
+          <span class="sl-query">Google Jobs — Industrial / Distribution Toronto (1 week)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🌎 North America — Remote / Relocation</div>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=chief+commercial+officer+industrial&location=Canada&f_E=5%2C6&f_WT=2&f_TPR=r604800" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">CCO Industrial — Canada Remote (Last 7d)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=VP+sales+capital+equipment+Canada&location=Canada&f_E=5%2C6&f_TPR=r604800" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">VP Sales Capital Equipment — Canada (Last 7d)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=president+HVAC+OR+%22building+materials%22&location=United+States&f_E=6&f_WT=2&f_TPR=r604800" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">President HVAC / Building Materials — US Remote</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.linkedin.com/jobs/search/?keywords=CCO+OR+CRO+renewable+energy&location=North+America&f_E=5%2C6&f_TPR=r604800" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform li">LI</span>
+          <span class="sl-query">CCO / CRO Renewable Energy — North America</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.execunet.com/jobs/?q=chief+commercial+officer+industrial" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform ex">EX</span>
+          <span class="sl-query">ExecuNet — CCO Industrial (Executive-Only Board)</span>
+        </div>
+        <span class="sl-count">Exec only</span>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.theladders.com/jobs/searchjobs?title=chief+commercial+officer&location=Canada" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform gg">LD</span>
+          <span class="sl-query">The Ladders — CCO Canada ($100K+)</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+
+      <a class="search-link" href="https://www.google.com/search?q=%22chief+commercial+officer%22+OR+%22VP+sales%22+%22renewable+energy%22+OR+%22circular+economy%22+Canada&ibp=htl;jobs&tbs=qdr:w" target="_blank">
+        <div class="sl-left">
+          <span class="sl-platform gg">GG</span>
+          <span class="sl-query">Google Jobs — Renewables / Circular Economy Canada</span>
+        </div>
+        <span class="arrow">→</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- TARGET COMPANIES -->
+  <div class="section-hdr">🏢 Target Companies — Research + Attack</div>
+  <div class="grid3">
+    <div class="card">
+      <div class="card-title">🔴 Industrial Distribution — P1</div>
+      <a class="company-row" href="https://www.linkedin.com/company/ww-grainger/" target="_blank">
+        <div><div class="company-name">Grainger Canada</div><div class="company-sub">MRO Distribution · $1B+ CA</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/guillevin-international/" target="_blank">
+        <div><div class="company-name">Guillevin International</div><div class="company-sub">Electrical + Industrial</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/msc-industrial-direct/" target="_blank">
+        <div><div class="company-name">MSC Industrial Direct</div><div class="company-sub">Industrial distribution</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/fastenal/" target="_blank">
+        <div><div class="company-name">Fastenal Canada</div><div class="company-sub">MRO + Industrial</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/anixter/" target="_blank">
+        <div><div class="company-name">Wesco International</div><div class="company-sub">Electrical + Industrial</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🔴 HVAC Distribution — P1 (Your Domain)</div>
+      <a class="company-row" href="https://www.linkedin.com/company/carrier-enterprise/" target="_blank">
+        <div><div class="company-name">Carrier Enterprise CA</div><div class="company-sub">HVAC/R Distribution</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/johnson-controls/" target="_blank">
+        <div><div class="company-name">Johnson Controls CA</div><div class="company-sub">HVAC + Building Tech</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/ferguson-enterprises/" target="_blank">
+        <div><div class="company-name">Ferguson Enterprises CA</div><div class="company-sub">Plumbing + HVAC Dist.</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/emco-corporation/" target="_blank">
+        <div><div class="company-name">Emco Corporation</div><div class="company-sub">Plumbing + HVAC/R</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/lennox-international/" target="_blank">
+        <div><div class="company-name">Lennox International</div><div class="company-sub">HVAC Manufacturing + Dist.</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p1"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">🟡 Capital Equip · Renewables · Circular</div>
+      <a class="company-row" href="https://www.linkedin.com/company/toromont-industries/" target="_blank">
+        <div><div class="company-name">Toromont Industries</div><div class="company-sub">Capital Equipment · TSX</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p2"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/finning-international/" target="_blank">
+        <div><div class="company-name">Finning International</div><div class="company-sub">Cat Dealer · TSX</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p2"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/boralex/" target="_blank">
+        <div><div class="company-name">Boralex</div><div class="company-sub">Renewable Energy · TSX</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p2"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/veolia-north-america/" target="_blank">
+        <div><div class="company-name">Veolia North America</div><div class="company-sub">Circular / Environmental</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot p2"></div><span class="company-link-btn">Find CEO →</span></div>
+      </a>
+      <a class="company-row" href="https://www.linkedin.com/company/call2recycle/" target="_blank">
+        <div><div class="company-name">⚡ Call2Recycle</div><div class="company-sub">CAS HAS WARM CONNECTION</div></div>
+        <div style="display:flex;align-items:center;gap:8px;"><div class="priority-dot warm"></div><span class="company-link-btn">Activate NOW →</span></div>
+      </a>
+    </div>
+  </div>
+
+  <!-- RECRUITERS -->
+  <div class="section-hdr">📧 Executive Search Firms — Email All 10 This Week</div>
+  <div class="card">
+    <div style="background: rgba(255,45,85,0.08); border: 1px solid rgba(255,45,85,0.2); border-radius: 10px; padding: 14px; margin-bottom: 16px; font-size: 0.88em; color: #ffaaaa;">
+      ⚡ <strong>60% of C-suite roles are never posted publicly.</strong> Recruiters fill them from their existing candidate pool. Get in that pool NOW — before they have the role.
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Korn Ferry</div><div class="rec-specialty">Industrial / Distribution — global firm, Toronto office</div></div>
+      <a href="https://www.kornferry.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Odgers Berndtson</div><div class="rec-specialty">Canada C-suite specialists — strong distribution practice</div></div>
+      <a href="https://www.odgersberndtson.com/en-ca" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Spencer Stuart</div><div class="rec-specialty">CCO / President searches — premium retained mandates</div></div>
+      <a href="https://www.spencerstuart.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Caldwell Partners</div><div class="rec-specialty">Canadian C-suite, Toronto-based</div></div>
+      <a href="https://www.caldwellpartners.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Egon Zehnder</div><div class="rec-specialty">Sustainability + industrial leadership</div></div>
+      <a href="https://www.egonzehnder.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Boyden Canada</div><div class="rec-specialty">Mid-market industrial — great for distribution</div></div>
+      <a href="https://www.boyden.com/canada" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Thorek/Scott and Partners</div><div class="rec-specialty">Toronto-based executive search specialists</div></div>
+      <a href="https://www.thorekscott.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Heidrick & Struggles</div><div class="rec-specialty">Top-tier global, Toronto office</div></div>
+      <a href="https://www.heidrick.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row">
+      <div><div class="rec-name">Ray & Berndtson / Transearch</div><div class="rec-specialty">Toronto-heavy C-suite</div></div>
+      <a href="https://transearch.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+    <div class="recruiter-row" style="border-bottom:none;">
+      <div><div class="rec-name">Reaction Search</div><div class="rec-specialty">Toronto executive specialists</div></div>
+      <a href="https://www.reactionsearch.com" target="_blank" class="send-btn">Find Partner →</a>
+    </div>
+  </div>
+
+  <!-- COMP + LINKEDIN -->
+  <div class="section-hdr">💰 Compensation + LinkedIn Optimization</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">💰 Know Your Number — Never Flinch</div>
+      <div class="grid2" style="gap: 10px; margin-bottom: 16px;">
+        <div class="comp-block">
+          <div class="comp-role">President / GM</div>
+          <div class="comp-base">$280K–$400K</div>
+          <div class="comp-total">Total: $350K–$600K + equity</div>
+        </div>
+        <div class="comp-block">
+          <div class="comp-role">CCO / CRO</div>
+          <div class="comp-base">$250K–$350K</div>
+          <div class="comp-total">Total: $300K–$450K</div>
+        </div>
+      </div>
+      <div style="background: rgba(245,166,35,0.08); border: 1px solid rgba(245,166,35,0.2); border-radius: 10px; padding: 14px;">
+        <div style="font-size:0.72em; text-transform:uppercase; letter-spacing:1px; color: var(--gold); font-weight:800; margin-bottom:8px;">When Asked Your Number:</div>
+        <div style="font-family: monospace; font-size: 0.85em; color: #d0d0f0; line-height: 1.7;">
+          "I'm targeting $300K+ total comp,<br>
+          with an emphasis on base. Flexible<br>
+          on structure if the fit is right."
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-title">💼 LinkedIn — Update Today</div>
+      <div class="linkedin-box">
+        <div style="font-size:0.78em; color: #79c0ff; font-weight:700; margin-bottom:6px;">COPY THIS HEADLINE RIGHT NOW:</div>
+        <div class="li-headline">CCO | President | Industrial Distribution | $100M+ Revenue Growth
+HVAC · Building Materials · Capital Equipment · Renewables · Circular Economy</div>
+        <button class="copy-btn" onclick="navigator.clipboard.writeText('CCO | President | Industrial Distribution | $100M+ Revenue Growth\nHVAC · Building Materials · Capital Equipment · Renewables · Circular Economy').then(()=>{this.textContent='✓ Copied!';setTimeout(()=>{this.textContent='Copy Headline';},2000})">Copy Headline</button>
+      </div>
+      <div style="margin-top: 14px; font-size: 0.85em; color: var(--muted);">
+        <strong style="color: var(--text);">Post weekly on LinkedIn</strong> — one article on commercial leadership in industrial/distribution. 4,000+ followers = your warm market. Compounding visibility that recruiters notice.
+      </div>
+    </div>
+  </div>
+
+  <!-- BOT + PIPELINE -->
+  <div class="section-hdr">🤖 Automation Bot + Pipeline</div>
+  <div class="grid2">
+    <div class="card">
+      <div class="card-title">🤖 Daily Job Alert Bot</div>
+      <div class="bot-status">
+        <div class="bot-row"><span class="bot-label">Bot Status</span><span class="bot-val warn pulse">⚠ SETUP REQUIRED (8 min)</span></div>
+        <div class="bot-row"><span class="bot-label">Delivers To</span><span class="bot-val">casianglavce@gmail.com</span></div>
+        <div class="bot-row"><span class="bot-label">Runs At</span><span class="bot-val">7:00 AM daily (cron)</span></div>
+        <div class="bot-row"><span class="bot-label">Job Boards</span><span class="bot-val">10 sites scraped daily</span></div>
+        <div class="bot-row"><span class="bot-label">Cost</span><span class="bot-val">$0 — completely free</span></div>
+      </div>
+      <a href="automation/setup.md" class="setup-btn">📖 Read Setup Guide (8 min) →</a>
+    </div>
+
+    <div class="card">
+      <div class="card-title">📊 Pipeline Tracker</div>
+      <div class="stage-bar">
+        <div class="stage"><div class="count">0</div><div class="label">Identified</div></div>
+        <div class="stage"><div class="count">0</div><div class="label">Applied</div></div>
+        <div class="stage"><div class="count">0</div><div class="label">Recruiter</div></div>
+        <div class="stage"><div class="count">0</div><div class="label">Screen</div></div>
+        <div class="stage active"><div class="count">0</div><div class="label">Interview</div></div>
+        <div class="stage active"><div class="count">0</div><div class="label">Final</div></div>
+        <div class="stage active"><div class="count">0</div><div class="label">Offer 🎯</div></div>
+      </div>
+      <div style="font-size: 0.82em; color: var(--muted); line-height: 1.8;">
+        <strong style="color:var(--text);">Week 1 targets:</strong><br>
+        → 25 companies identified ·  10 applications submitted<br>
+        → 10 recruiter emails sent · 3 responses received<br>
+        → 15 CEO LinkedIn connections sent
+      </div>
+      <a href="tracker/pipeline.md" class="setup-btn" style="background: var(--accent2);">📋 Open Pipeline Tracker →</a>
+    </div>
+  </div>
+
+  <!-- INTERVIEW POWER MOVES -->
+  <div class="section-hdr">🎤 Interview Power Questions — Ask These Every Time</div>
+  <div class="card">
+    <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 12px;">
+      <div style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 16px;">
+        <div style="font-size:0.7em; color: #a78bfa; font-weight:800; letter-spacing:1px; margin-bottom:8px;">QUESTION 1</div>
+        <div style="font-size:0.9em; line-height:1.5; font-style:italic;">"What does commercial success look like here in 18 months — and what's currently in the way?"</div>
+      </div>
+      <div style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 16px;">
+        <div style="font-size:0.7em; color: #a78bfa; font-weight:800; letter-spacing:1px; margin-bottom:8px;">QUESTION 2</div>
+        <div style="font-size:0.9em; line-height:1.5; font-style:italic;">"How does the board or ownership measure the success of this role?"</div>
+      </div>
+      <div style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 16px;">
+        <div style="font-size:0.7em; color: #a78bfa; font-weight:800; letter-spacing:1px; margin-bottom:8px;">QUESTION 3</div>
+        <div style="font-size:0.9em; line-height:1.5; font-style:italic;">"What happened to the last person in this seat — and what would they have done differently?"</div>
+      </div>
+      <div style="background: rgba(124,58,237,0.08); border: 1px solid rgba(124,58,237,0.2); border-radius: 10px; padding: 16px;">
+        <div style="font-size:0.7em; color: #a78bfa; font-weight:800; letter-spacing:1px; margin-bottom:8px;">QUESTION 4</div>
+        <div style="font-size:0.9em; line-height:1.5; font-style:italic;">"What's the biggest untapped revenue opportunity you see right now?"</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <strong style="color:var(--accent); font-size:1.1em;">CAS'S JOB MOFO</strong> · Built for Casian Glavce · February 2026 · Toronto, Ontario<br>
+  System designed by Daniel Yarmoluk · Open <code>index.html</code> in your browser daily
+</footer>
+
+</body>
+</html>
