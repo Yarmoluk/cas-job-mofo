@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Casian G. Glavce — Executive Resume</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: #e8e8e4;
+    color: #1a1a1a;
+    font-size: 8pt;
+    line-height: 1.38;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .page {
+    width: 8.5in;
+    background: white;
+    margin: 0 auto;
+    box-shadow: 0 4px 40px rgba(0,0,0,0.15);
+  }
+
+  /* ── HEADER ── */
+  .header {
+    background: #0f1e3c;
+    padding: 16px 44px 12px;
+    color: white;
+    -webkit-print-color-adjust: exact;
+  }
+  .header-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 7px;
+  }
+  .name {
+    font-size: 22pt;
+    font-weight: 300;
+    letter-spacing: -0.5px;
+    color: white;
+    line-height: 1;
+  }
+  .name strong { font-weight: 800; }
+  .contact-block {
+    text-align: right;
+    font-size: 7.8pt;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.75;
+  }
+  .contact-block a { color: rgba(255,255,255,0.65); text-decoration: none; }
+  .title-bar {
+    border-top: 1px solid rgba(255,255,255,0.18);
+    padding-top: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .executive-title {
+    font-size: 8pt;
+    font-weight: 600;
+    color: #c9a84c;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+  }
+  .geo-tag {
+    font-size: 7.2pt;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  /* ── METRICS STRIP ── */
+  .metrics-strip {
+    background: #f5f2eb;
+    border-bottom: 2.5px solid #0f1e3c;
+    padding: 7px 44px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    -webkit-print-color-adjust: exact;
+  }
+  .metric-item {
+    text-align: center;
+    flex: 1;
+  }
+  .metric-item + .metric-item { border-left: 1px solid #ddd; }
+  .metric-val {
+    font-size: 12pt;
+    font-weight: 800;
+    color: #0f1e3c;
+    line-height: 1;
+    display: block;
+  }
+  .metric-lbl {
+    font-size: 6.2pt;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
+    margin-top: 2px;
+    display: block;
+    line-height: 1.4;
+  }
+
+  /* ── BODY ── */
+  .body { padding: 12px 44px 0; }
+
+  /* ── SECTION ── */
+  .section { margin-bottom: 10px; }
+  .section-label {
+    font-size: 6.5pt;
+    font-weight: 700;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    color: #0f1e3c;
+    border-bottom: 2px solid #0f1e3c;
+    padding-bottom: 2px;
+    margin-bottom: 6px;
+  }
+
+  /* ── SUMMARY ── */
+  .summary {
+    font-size: 7.9pt;
+    line-height: 1.5;
+    color: #2a2a2a;
+  }
+
+  /* ── COMPETENCIES ── */
+  .competencies { display: flex; flex-wrap: wrap; gap: 3px; }
+  .comp-tag {
+    background: #eef1f8;
+    border: 1px solid #cdd5ea;
+    color: #0f1e3c;
+    font-size: 6.8pt;
+    font-weight: 500;
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+
+  /* ── EXPERIENCE ── */
+  .role {
+    margin-bottom: 8px;
+    page-break-inside: avoid;
+  }
+  .role-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1px;
+  }
+  .role-left { flex: 1; }
+  .role-title {
+    font-size: 8.8pt;
+    font-weight: 700;
+    color: #0f1e3c;
+    line-height: 1.2;
+  }
+  .role-company {
+    font-size: 8pt;
+    color: #333;
+    font-weight: 500;
+    margin-top: 1px;
+  }
+  .role-company .ticker {
+    color: #888;
+    font-weight: 400;
+    font-size: 7.5pt;
+  }
+  .role-meta {
+    text-align: right;
+    font-size: 7.5pt;
+    color: #888;
+    line-height: 1.5;
+    min-width: 110px;
+  }
+  .role-meta .dates { font-weight: 700; color: #444; }
+  .achievements { list-style: none; padding: 0; margin-top: 3px; }
+  .achievements li {
+    font-size: 7.8pt;
+    color: #2a2a2a;
+    padding: 1.5px 0 1.5px 13px;
+    position: relative;
+    line-height: 1.4;
+    border-bottom: 1px solid #f5f5f5;
+  }
+  .achievements li:last-child { border-bottom: none; }
+  .achievements li::before {
+    content: '▸';
+    position: absolute;
+    left: 0;
+    color: #c9a84c;
+    font-size: 7pt;
+    top: 3px;
+  }
+  .achievements li strong { color: #0f1e3c; font-weight: 700; }
+
+  /* ── PAGE BREAK ── */
+  .page-break {
+    page-break-before: always;
+    padding-top: 14px;
+  }
+  .page-break-spacer { height: 14px; }
+
+  /* ── TWO COL ── */
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 28px;
+    padding-bottom: 28px;
+  }
+
+  /* ── EDUCATION ── */
+  .edu-item { margin-bottom: 7px; }
+  .edu-degree { font-size: 8.5pt; font-weight: 700; color: #0f1e3c; }
+  .edu-school { font-size: 8pt; color: #555; }
+  .edu-detail { font-size: 7.5pt; color: #888; margin-top: 1px; }
+
+  /* ── DIVIDER ── */
+  .role-divider {
+    height: 1px;
+    background: #e8e8e8;
+    margin: 2px 0 10px;
+  }
+
+  /* ── PRINT ── */
+  @page {
+    size: letter;
+    margin: 0;
+  }
+  @media print {
+    body { background: white; }
+    .page { box-shadow: none; margin: 0; width: 100%; }
+  }
+  @media screen {
+    body { padding: 30px 0 60px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-top">
+      <div class="name">Casian G. <strong>Glavce</strong></div>
+      <div class="contact-block">
+        647-467-2277 &nbsp;·&nbsp; <a href="mailto:casianglavce@gmail.com">casianglavce@gmail.com</a><br>
+        <a href="https://linkedin.com/in/casianglavce">linkedin.com/in/casianglavce</a> &nbsp;·&nbsp; Toronto, Ontario
+      </div>
+    </div>
+    <div class="title-bar">
+      <div class="executive-title">President &nbsp;·&nbsp; Chief Commercial Officer &nbsp;·&nbsp; Chief Revenue Officer &nbsp;·&nbsp; VP Sales</div>
+      <div class="geo-tag">GTA Hybrid &nbsp;|&nbsp; North America Remote</div>
+    </div>
+  </div>
+
+  <!-- METRICS STRIP -->
+  <div class="metrics-strip">
+    <div class="metric-item">
+      <span class="metric-val">137%</span>
+      <span class="metric-lbl">EBITDA Growth · 8 Months<br>Toromont CAT (TSX: TIH)</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-val">$1.3B</span>
+      <span class="metric-lbl">Revenue Scope<br>Wolseley / Ferguson (NYSE: FERG)</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-val">+$40M</span>
+      <span class="metric-lbl">Above Revenue Budget<br>130 Reps · 16 Managers</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-val">$38M</span>
+      <span class="metric-lbl">Built from $0 · 2 Years<br>Arabesque Bulgaria</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-val">24.3%</span>
+      <span class="metric-lbl">Global Revenue Growth<br>Thermon (NYSE: THR)</span>
+    </div>
+    <div class="metric-item">
+      <span class="metric-val">650bps</span>
+      <span class="metric-lbl">Net Profit Improvement<br>C.R. Laurence / Oldcastle</span>
+    </div>
+  </div>
+
+  <!-- ══ PAGE 1 BODY ══ -->
+  <div class="body">
+
+    <div class="section">
+      <div class="section-label">Executive Profile</div>
+      <div class="summary">Transformational commercial executive with 20+ years driving consistent revenue growth and P&L improvement across NYSE/TSX listed companies, PE-backed businesses, and greenfield markets. Track record turning around underperforming operations, scaling national and global sales organizations, and building commercial infrastructure that delivers durable margin expansion — from greenfield $0 to $1B+ operations. Deep expertise across industrial, capital equipment, wholesale distribution, building products, and clean tech. Fluent: English, Romanian, Bulgarian, French.</div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Core Competencies</div>
+      <div class="competencies">
+        <span class="comp-tag">P&L Ownership &amp; Turnaround</span>
+        <span class="comp-tag">Commercial Strategy &amp; Execution</span>
+        <span class="comp-tag">Revenue Acceleration</span>
+        <span class="comp-tag">National &amp; Global Sales Leadership</span>
+        <span class="comp-tag">Greenfield Market Entry</span>
+        <span class="comp-tag">EBITDA Optimization</span>
+        <span class="comp-tag">Change Management</span>
+        <span class="comp-tag">Team Building at Scale</span>
+        <span class="comp-tag">CRM &amp; ERP Implementation</span>
+        <span class="comp-tag">MS Dynamics · Power BI · SAP</span>
+        <span class="comp-tag">Investor &amp; Board Reporting</span>
+        <span class="comp-tag">M&amp;A Commercial Due Diligence</span>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-label">Professional Experience</div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-left">
+            <div class="role-title">Chief Commercial Officer</div>
+            <div class="role-company">Samsar Resources LLC <span class="ticker">— Circularity-as-a-Service · Li-ion Battery Repurposing · New York, USA (Remote)</span></div>
+          </div>
+          <div class="role-meta"><div class="dates">2023 – Present</div></div>
+        </div>
+        <ul class="achievements">
+          <li>Joined pre-revenue; architected full go-to-market strategy, commercialization roadmap, and revenue models — driving <strong>first commercial deployments</strong> of NthLife™ repurposed battery systems across equipment rental, construction, telecom, utilities, and marine sectors.</li>
+          <li>Secured <strong>Tier-1 EV OEM partnerships</strong> ensuring multi-cycle Li-ion cell repurposing, boosting margins while aligning with global sustainability mandates.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-left">
+            <div class="role-title">Vice President of Canada</div>
+            <div class="role-company">C.R. Laurence / Oldcastle BuildingEnvelope <span class="ticker">— Architectural Metals, Glass Fittings &amp; Glazing Supplies · $70M Canadian P&L</span></div>
+          </div>
+          <div class="role-meta"><div class="dates">2021 – 2022</div></div>
+        </div>
+        <ul class="achievements">
+          <li>Full P&L responsibility across four Canadian service centers; recruited to revitalize an underperforming region and transform it into a high-performing national division.</li>
+          <li>Delivered <strong>650 basis points of net profit improvement</strong> and <strong>118% of the FY21 sales plan</strong> through compensation restructuring, CX strategy redesign, and centralized operations.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-left">
+            <div class="role-title">Director of Global Sales &amp; Business Development</div>
+            <div class="role-company">Thermon Heating Systems <span class="ticker">(NYSE: THR) — Industrial Process Heating · North America · EMEA · APAC · Russia</span></div>
+          </div>
+          <div class="role-meta"><div class="dates">2019 – 2021</div></div>
+        </div>
+        <ul class="achievements">
+          <li>Owned global commercial performance across four geographies; managed budgeting, MBR/QBR forecasting, and performance tracking within a matrixed international organization.</li>
+          <li>Delivered <strong>24.3% revenue increase</strong> and restructured business plan to diversify beyond oil &amp; gas — expanding into renewables, pharma, data centers, and rail &amp; transit.</li>
+          <li>Drove <strong>MS Dynamics CRM and Power BI</strong> adoption to enable more accurate cross-regional forecasting; recruited and developed a world-class global sales and engineering team.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-left">
+            <div class="role-title">General Manager — Material Handling Division</div>
+            <div class="role-company">Toromont CAT <span class="ticker">(TSX: TIH) — Capital Equipment · Caterpillar Dealership · Ontario</span></div>
+          </div>
+          <div class="role-meta"><div class="dates">2015 – 2019</div></div>
+        </div>
+        <ul class="achievements">
+          <li>Inherited a loss-making division; rebuilt leadership team, clarified strategic priorities, and instilled a culture of accountability — <strong>turned losses to profitability within 9 months</strong>.</li>
+          <li>Grew revenue <strong>33%</strong> and expanded <strong>EBITDA 137% within 8 months</strong> through operational restructuring, talent strategy, and commercial re-engagement of key accounts.</li>
+          <li>Implemented automated work-order platform raising technician productivity by 10%; designed inclusive recruitment approaches supporting a future-ready workforce.</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══ PAGE 2 ══ -->
+  <div class="body page-break">
+
+    <div class="section">
+      <div class="section-label">Professional Experience <span style="font-weight:400;letter-spacing:0;text-transform:none;font-size:7pt;color:#888;">(continued)</span></div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-left">
+            <div class="role-title">National Director of Sales</div>
+            <div class="role-company">Wolseley Canada / Ferguson Plc <span class="ticker">(NYSE: FERG) — Wholesale Distribution · $1.3B Canadian Subsidiary · 16 Managers · 130 Sales Representatives</span></div>
+          </div>
+          <div class="role-meta"><div class="dates">2012 – 2015</div></div>
+        </div>
+        <ul class="achievements">
+          <li>Led national sales operations for a $1.3B subsidiary of a global distribution leader; transformed a fragmented field organization into a metrics-driven, high-performance team.</li>
+          <li>Delivered <strong>12% national revenue increase — $40M above budget</strong> — through disciplined pipeline management, gamification, and unified performance accountability across 130 reps and 16 managers.</li>
+          <li>Achieved <strong>93% CRM field adoption in 10 months</strong>, enhancing visibility and decision-making at all levels; drove alignment across regional and national strategic objectives.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-left">
+            <div class="role-title">Country Manager — Bulgaria</div>
+            <div class="role-company">Arabesque Ltd. <span class="ticker">— Eastern Europe's Largest Wholesale Building Materials Distributor · $600M+ Company Revenue</span></div>
+          </div>
+          <div class="role-meta"><div class="dates">2006 – 2012</div></div>
+        </div>
+        <ul class="achievements">
+          <li>Built the Bulgarian subsidiary from a <strong>zero-revenue greenfield to $38M in 2 years</strong> — establishing full market presence, supply chain, and a 120-person team serving 7,000+ clients.</li>
+          <li>Managed full P&L, capital expenditures, procurement, and inventory across a large commercial vehicle fleet; sourced product from China, Europe, and North America.</li>
+          <li>Implemented <strong>SAP ERP</strong> and CRM systems; surpassed initial revenue and profitability targets <strong>three years ahead of schedule</strong>.</li>
+        </ul>
+      </div>
+
+      <div class="role">
+        <div class="role-header">
+          <div class="role-left">
+            <div class="role-title">Senior Business Development Manager</div>
+            <div class="role-company">Open Text Corporation <span class="ticker">(NASDAQ: OTEX) — Enterprise Content Management · 11 US States · Fortune 500 &amp; Government Accounts</span></div>
+          </div>
+          <div class="role-meta"><div class="dates">2003 – 2006</div></div>
+        </div>
+        <ul class="achievements">
+          <li>Oversaw business development and channel sales across 11 US states; built and maintained partnerships with Fortune 500 and government stakeholders; additional early career experience as General Manager, ASTAware Technologies.</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="two-col" style="margin-top: 4px;">
+      <div class="section" style="margin-bottom:0;">
+        <div class="section-label">Education &amp; Credentials</div>
+        <div class="edu-item">
+          <div class="edu-degree">Bachelor of Science — Metallurgy &amp; Materials Science</div>
+          <div class="edu-school">University of Galati (Lower Danube University), Romania</div>
+        </div>
+        <div class="edu-item" style="margin-top:8px;">
+          <div class="edu-degree">Lecturer — Business Strategy &amp; High-Performance Leadership</div>
+          <div class="edu-school">National &amp; World Economy University, Bulgaria</div>
+          <div class="edu-detail">Competitive Advantage · Managing for Execution · Strategic Leadership</div>
+        </div>
+      </div>
+      <div class="section" style="margin-bottom:0;">
+        <div class="section-label">Additional Information</div>
+        <div style="font-size:8.3pt; color:#2a2a2a; line-height:2;">
+          <div><strong style="color:#0f1e3c;">Languages:</strong> &nbsp;English · Romanian · Bulgarian · French</div>
+          <div><strong style="color:#0f1e3c;">Public Co. Exp:</strong> &nbsp;NYSE: THR · NYSE: FERG · TSX: TIH · NASDAQ: OTEX</div>
+          <div><strong style="color:#0f1e3c;">Technology:</strong> &nbsp;MS Dynamics CRM · Power BI · SAP ERP · HubSpot · Odoo</div>
+          <div><strong style="color:#0f1e3c;">Sectors:</strong> &nbsp;Industrial · Distribution · Cap Equipment · Building Products · Clean Tech</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+</body>
+</html>
