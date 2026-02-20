@@ -1,0 +1,4 @@
+automation/
+*.log
+seen_jobs.json
+digest_*.html
